@@ -1,86 +1,44 @@
 <?php
 class RichestPeople extends Controller {
+  // Properties, field
+  private $richestPersonModel;
 
+  // Dit is de constructor
   public function __construct() {
-    $this->RichModel = $this->model('RichestPeople');
+    $this->richestPersonModel = $this->model('RichestPerson');
   }
 
   public function index() {
-    /**
-     * Haal via de method getFruits() uit de model Fruit de records op
-     * uit de database
-     */
-    $RichestPeople = $this->RichModel->getRich();
+    $richestPeople = $this->richestPersonModel->getRichestPeople();
 
-    /**
-     * Maak de inhoud voor de tbody in de view
-     */
     $rows = '';
-    foreach ($RichestPeople as $value){
+    foreach ($richestPeople as $value){
       $rows .= "<tr>
-                  <td>$value->id</td>
-                  <td>" . htmlentities($value->Name, ENT_QUOTES, 'ISO-8859-1') . "</td>
-                  <td>" . htmlentities($value->Networth, ENT_QUOTES, 'ISO-8859-1') . "</td>
-                  <td>" . htmlentities($value->Age, ENT_QUOTES, 'ISO-8859-1') . "</td>
-                  <td>" . htmlentities($value->MyCompany, 0, ',', '.') . "</td>
-                  <td><a href='" . URLROOT . "/richestpeople/delete/$value->id'>delete<a></td>
+                  <td>$value->Id</td>
+                  <td>$value->Name</td>
+                  <td>$value->Networth</td>
+                  <td>$value->Age</td>
+                  <td>$value->MyCompany</td>
+                  <td><a href='" . URLROOT . "/richestpeople/delete/$value->Id'>delete</a></td>
                 </tr>";
     }
 
 
     $data = [
-      'title' => '<h1>Landenoverzicht</h1>',
-      'countries' => $rows
+      'title' => '<h1>De vijf rijkste mensen ter wereld</h1>',
+      'richestpeople' => $rows
     ];
-    $this->view('countries/index', $data);
+    $this->view('richestpeople/index', $data);
   }
 
-  public function update($id = null){
-    if ($_SERVER["REQUEST_METHOD"] == "POST"){
-      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-      $this->Richmodel->updateRich($_POST);
-      header("Location: " . URLROOT . "/countries/index");  
-    } else {
-      $row = $this->Richmodel->getSingleRich($id);
-      $data = [
-      'title' => '<h1>Update LandenOverzicht</h1>',
-      'row' => $row
-    ];
-    $this->view("countries/update", $data);
-    }
-   
-  }
-
-  public function delete($id){
-
-    $this->countryModel->deleteCountry($id);
+  public function delete($Id) {
+    $this->richestPersonModel->deleteRichestPerson($Id);
 
     $data =[
-      'deleteStatus' => "Het record meet id = $id is verwijdert"
+      'deleteStatus' => "Het record met id = $Id is verwijdert"
     ];
-    $this->view("countries/delete", $data);
-    header("Refresh:2; url=" . URLROOT . "/countries/index");
-  }
-
-  public function create(){
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-      try{
-      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-      $this->countryModel->createCountry($_POST);
-
-      header("Location:" . URLROOT . "countries/index");
-    } catch(PDOException $e){
-      echo "Het inserten van het record is niet gelukt";
-      header("Refresh:3; url=" . URLROOT . "/countries/index");
-    }
-
-    } else {
-      $data = [
-        'title' => "Voeg een nieuw land in"
-      ];
-      $this->view("countries/create", $data);
-    }
+    $this->view("richestpeople/delete", $data);
+    header("Refresh:3; url=" . URLROOT . "/richestpeople/index");
   }
 }
 

@@ -1,16 +1,19 @@
-<?php echo $data["title"]; ?>
+<?php 
+  //include(APPROOT . "/views/includes/head.php" );
+  echo $data["title"]; 
+?>
 <table>
-    <thead>
-        <th>id</th>
-        <th>naam</th>
-        <th>networth</th>
-        <th>age</th>
-        <th>Company</th>
-        <th>update</th>
-        <th>delete</th>
-    </thead>
-    <tbody>
-        <?=$data['countries']?>
-    </tbody>
+  <thead>
+    <th>id</th>
+    <th>Naam</th>
+    <th>Vermogen</th>
+    <th>Leeftijd</th>
+    <th>Bedrijf</th>
+    <th>delete</th>
+  </thead>
+  <tbody>
+    <?=$data['richestpeople']?>
+  </tbody>
 </table>
 <a href="<?=URLROOT;?>/homepages/index">terug</a>
+
