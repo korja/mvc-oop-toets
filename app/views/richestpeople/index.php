@@ -5,10 +5,10 @@
 <table>
   <thead>
     <th>id</th>
-    <th>Naam</th>
-    <th>Vermogen</th>
-    <th>Leeftijd</th>
-    <th>Bedrijf</th>
+    <th>Name</th>
+    <th>Networth</th>
+    <th>Age</th>
+    <th>Company</th>
     <th>delete</th>
   </thead>
   <tbody>
