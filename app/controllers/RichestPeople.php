@@ -1,8 +1,8 @@
 <?php
-class Countries extends Controller {
+class RichestPeople extends Controller {
 
   public function __construct() {
-    $this->countryModel = $this->model('Country');
+    $this->RichModel = $this->model('RichestPeople');
   }
 
   public function index() {
@@ -10,21 +10,20 @@ class Countries extends Controller {
      * Haal via de method getFruits() uit de model Fruit de records op
      * uit de database
      */
-    $countries = $this->countryModel->getCountries();
+    $RichestPeople = $this->RichModel->getRich();
 
     /**
      * Maak de inhoud voor de tbody in de view
      */
     $rows = '';
-    foreach ($countries as $value){
+    foreach ($RichestPeople as $value){
       $rows .= "<tr>
                   <td>$value->id</td>
-                  <td>" . htmlentities($value->name, ENT_QUOTES, 'ISO-8859-1') . "</td>
-                  <td>" . htmlentities($value->capitalCity, ENT_QUOTES, 'ISO-8859-1') . "</td>
-                  <td>" . htmlentities($value->continent, ENT_QUOTES, 'ISO-8859-1') . "</td>
-                  <td>" . number_format($value->population, 0, ',', '.') . "</td>
-                  <td><a href='" . URLROOT . "/countries/update/$value->id'>update<a></td>
-                  <td><a href='" . URLROOT . "/countries/delete/$value->id'>delete<a></td>
+                  <td>" . htmlentities($value->Name, ENT_QUOTES, 'ISO-8859-1') . "</td>
+                  <td>" . htmlentities($value->Networth, ENT_QUOTES, 'ISO-8859-1') . "</td>
+                  <td>" . htmlentities($value->Age, ENT_QUOTES, 'ISO-8859-1') . "</td>
+                  <td>" . htmlentities($value->MyCompany, 0, ',', '.') . "</td>
+                  <td><a href='" . URLROOT . "/richestpeople/delete/$value->id'>delete<a></td>
                 </tr>";
     }
 

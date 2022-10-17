@@ -1,12 +1,11 @@
 <?php echo $data["title"]; ?>
-<a href="<?=URLROOT;?>/countries/create">Nieuw record</a>
 <table>
     <thead>
         <th>id</th>
-        <th>Land</th>
-        <th>hoofdstad</th>
-        <th>continent</th>
-        <th>aantalinwoners</th>
+        <th>naam</th>
+        <th>networth</th>
+        <th>age</th>
+        <th>Company</th>
         <th>update</th>
         <th>delete</th>
     </thead>
