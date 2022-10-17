@@ -38,10 +38,10 @@ class RichestPeople extends Controller {
   public function update($id = null){
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-      $this->countryModel->updateCountry($_POST);
+      $this->Richmodel->updateRich($_POST);
       header("Location: " . URLROOT . "/countries/index");  
     } else {
-      $row = $this->countryModel->getSingleCountry($id);
+      $row = $this->Richmodel->getSingleRich($id);
       $data = [
       'title' => '<h1>Update LandenOverzicht</h1>',
       'row' => $row
